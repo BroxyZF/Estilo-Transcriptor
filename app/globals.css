@@ -1,0 +1,330 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NORMA SRH — Sistema tipográfico
+   Inspiración: revista filológica, manuscrito iluminado contenido,
+   Enciclopedia Británica en su mejor época.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Paleta — modo diurno (papel de archivo) */
+  --paper:       #F6F2EA;   /* papel cálido */
+  --paper-sunk:  #EEE7D9;   /* papel en sombra suave */
+  --ink:         #1A1613;   /* tinta cálida, nunca negro puro */
+  --muted:       #6B6255;   /* tinta diluida para metadatos */
+  --rule:        #D9CEB9;   /* línea de filete */
+  --rubric:      #8B2230;   /* rojo de rúbrica medieval */
+  --gold:        #A67C3D;   /* oro apagado de iluminación */
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'PT Serif', Georgia, serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+}
+
+.dark {
+  /* Paleta — modo nocturno (pergamino invertido, museo de noche) */
+  --paper:       #12100E;
+  --paper-sunk:  #1A1714;
+  --ink:         #E8E0D0;
+  --muted:       #9A9183;
+  --rule:        #3A342C;
+  --rubric:      #C54B5A;
+  --gold:        #CBA166;
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-variant-ligatures: common-ligatures contextual;
+}
+
+body {
+  color: var(--ink);
+  background-color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  font-feature-settings: "onum" 1, "kern" 1;
+  /* Textura de papel: fibras sutilísimas, no invasivas */
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.09  0 0 0 0 0.08  0 0 0 0.035 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 220px 220px;
+}
+
+.dark body {
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.85  0 0 0 0 0.80  0 0 0 0 0.70  0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+::selection {
+  background-color: var(--rubric);
+  color: var(--paper);
+}
+
+/* ─── Tipografía editorial ───────────────────────────────────────────────── */
+
+.font-display { font-family: var(--font-display); }
+
+.smallcaps {
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+}
+
+.oldstyle-nums {
+  font-variant-numeric: oldstyle-nums;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Drop cap tipo incunable — para el primer párrafo de la Norma */
+.drop-cap::first-letter {
+  font-family: var(--font-display);
+  font-weight: 400;
+  float: left;
+  font-size: 5rem;
+  line-height: 0.85;
+  padding: 0.25rem 0.6rem 0 0;
+  color: var(--rubric);
+  font-feature-settings: "swsh" 1;
+}
+
+/* Numeración romana decorativa (para secciones) */
+.roman-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+  font-variant-numeric: oldstyle-nums;
+}
+
+/* ─── Filete editorial (la línea horizontal con un ornamento central) ───── */
+
+.filete {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--rule);
+}
+
+.filete::before,
+.filete::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+}
+
+.filete-ornament {
+  color: var(--gold);
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+}
+
+/* ─── Focus ring elegante (no el azul de navegador) ─────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ─── Scrollbar sobria ──────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--rule);
+  border-radius: 999px;
+  border: 2px solid var(--paper);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* ─── Prosa de la Norma (tipografía de revista académica) ───────────────── */
+
+.prose-norma {
+  color: var(--ink);
+  max-width: 68ch;
+}
+
+.prose-norma h1,
+.prose-norma h2,
+.prose-norma h3,
+.prose-norma h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.prose-norma h1 {
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  margin: 0 0 1.25rem;
+}
+.prose-norma h2 {
+  font-size: 1.875rem;
+  margin: 3.5rem 0 1rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+  font-style: normal;
+}
+.prose-norma h2::before {
+  content: "§ ";
+  color: var(--gold);
+  font-style: italic;
+  font-weight: 400;
+}
+.prose-norma h3 {
+  font-size: 1.3rem;
+  margin: 2.25rem 0 0.75rem;
+  color: var(--rubric);
+  font-weight: 500;
+}
+.prose-norma h4 {
+  font-size: 1.05rem;
+  margin: 1.75rem 0 0.5rem;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.prose-norma p {
+  margin: 0.9rem 0;
+}
+.prose-norma p + p {
+  text-indent: 1.5em;
+}
+.prose-norma p:first-of-type,
+.prose-norma h2 + p,
+.prose-norma h3 + p,
+.prose-norma h4 + p,
+.prose-norma hr + p,
+.prose-norma ul + p,
+.prose-norma ol + p,
+.prose-norma blockquote + p,
+.prose-norma table + p {
+  text-indent: 0;
+}
+
+.prose-norma strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.prose-norma em {
+  font-style: italic;
+}
+
+.prose-norma hr {
+  border: 0;
+  height: 1px;
+  background: var(--rule);
+  margin: 2.5rem 0;
+}
+
+.prose-norma blockquote {
+  border-left: 2px solid var(--gold);
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.prose-norma ul,
+.prose-norma ol {
+  margin: 0.9rem 0;
+  padding-left: 1.5rem;
+}
+.prose-norma li {
+  margin: 0.35rem 0;
+}
+.prose-norma ul > li::marker {
+  color: var(--gold);
+}
+
+.prose-norma a {
+  color: var(--rubric);
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 160ms, text-decoration-color 160ms;
+}
+.prose-norma a:hover {
+  color: var(--gold);
+  text-decoration-color: var(--rubric);
+}
+
+.prose-norma code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--paper-sunk);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  color: var(--ink);
+}
+
+/* Tablas editoriales — inspiradas en revistas científicas */
+.prose-norma table {
+  width: 100%;
+  margin: 2rem 0;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+.prose-norma thead {
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.prose-norma tbody {
+  border-bottom: 2px solid var(--ink);
+}
+.prose-norma th {
+  text-align: left;
+  font-family: var(--font-display);
+  font-weight: 500;
+  padding: 0.7rem 0.9rem;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+}
+.prose-norma td {
+  padding: 0.65rem 0.9rem;
+  border-top: 1px solid var(--rule);
+  vertical-align: top;
+}
+.prose-norma tr:hover td {
+  background: var(--paper-sunk);
+}
+
+/* ─── Utilidades finales ─────────────────────────────────────────────────── */
+
+.paper-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow-paper, 0 24px 48px -24px rgba(26, 22, 19, 0.18));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
