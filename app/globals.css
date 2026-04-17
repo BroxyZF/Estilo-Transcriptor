@@ -13,7 +13,7 @@
   --paper:       #F6F2EA;   /* papel cálido */
   --paper-sunk:  #EEE7D9;   /* papel en sombra suave */
   --ink:         #1A1613;   /* tinta cálida, nunca negro puro */
-  --muted:       #6B6255;   /* tinta diluida para metadatos */
+  --muted:       #544D43;   /* tinta diluida para metadatos — contraste AA */
   --rule:        #D9CEB9;   /* línea de filete */
   --rubric:      #8B2230;   /* rojo de rúbrica medieval */
   --gold:        #A67C3D;   /* oro apagado de iluminación */
@@ -28,7 +28,7 @@
   --paper:       #12100E;
   --paper-sunk:  #1A1714;
   --ink:         #E8E0D0;
-  --muted:       #9A9183;
+  --muted:       #B2A99B;
   --rule:        #3A342C;
   --rubric:      #C54B5A;
   --gold:        #CBA166;
@@ -65,6 +65,36 @@ body {
 ::selection {
   background-color: var(--rubric);
   color: var(--paper);
+}
+
+/* ─── Formularios: eliminar estilos nativos del navegador ────────────────
+   Evita el "destello" blanco/azul que algunos navegadores pintan al
+   enfocar un textarea o input (box-shadow interno, appearance nativa,
+   highlight táctil en móvil). */
+
+textarea,
+input[type="text"],
+input[type="search"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-clip: padding-box;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+  caret-color: var(--gold);
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="search"]:focus {
+  box-shadow: none;
+}
+
+/* Autofill: el amarillo del navegador no debe ganar a la paleta */
+textarea:-webkit-autofill,
+input:-webkit-autofill {
+  -webkit-text-fill-color: var(--ink);
+  -webkit-box-shadow: 0 0 0 1000px var(--paper) inset;
+  transition: background-color 9999s ease-in-out 0s;
 }
 
 /* ─── Tipografía editorial ───────────────────────────────────────────────── */
