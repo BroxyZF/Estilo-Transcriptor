@@ -27,6 +27,7 @@ export interface OpcionesTranscripcion {
   texto: string;
   colapsar_consonantes?: boolean;
   y_extranjera?: boolean;
+  usar_pln?: boolean;
 }
 
 const API_URL =
@@ -69,6 +70,7 @@ export async function transcribir(
     texto: opciones.texto,
     colapsar_consonantes: opciones.colapsar_consonantes ?? true,
     y_extranjera: opciones.y_extranjera ?? false,
+    usar_pln: opciones.usar_pln ?? false,
   };
 
   const res = await fetch(`${API_URL}/transcribir`, {

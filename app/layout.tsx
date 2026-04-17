@@ -24,22 +24,22 @@ const fontMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Norma SRH · Transcripción filológica ruso → español",
+  title: "Norma SRH · Sistema de Romanización Hispánico",
   description:
-    "Sistema definitivo de transliteración del ruso al español. Acentuación ortográfica RAE automática, red neuronal prosódica y arbitraje contextual.",
+    "Transcripción del ruso al español conforme a la Norma SRH, con acentuación ortográfica según la RAE.",
   authors: [{ name: "Norma SRH" }],
   keywords: [
-    "transliteración ruso español",
     "Norma SRH",
+    "Sistema de Romanización Hispánico",
     "transcripción del ruso",
-    "filología",
-    "RAE",
+    "transliteración ruso español",
     "cirílico",
+    "RAE",
   ],
   openGraph: {
-    title: "Norma SRH · Transcripción filológica ruso → español",
+    title: "Norma SRH · Sistema de Romanización Hispánico",
     description:
-      "Sistema definitivo de transliteración del ruso al español con arbitraje ortográfico RAE.",
+      "Transcripción del ruso al español conforme a la Norma SRH.",
     type: "website",
     locale: "es_ES",
   },
@@ -48,7 +48,8 @@ export const metadata: Metadata = {
 
 /**
  * Script de bloqueo del "flash of wrong theme".
- * Se ejecuta antes de pintar; lee la preferencia del usuario o el sistema.
+ * Se ejecuta antes de pintar; respeta la preferencia guardada por el usuario,
+ * y si no la hay, sigue la preferencia del sistema operativo.
  */
 const themeScript = `
 (function() {

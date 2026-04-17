@@ -285,7 +285,7 @@ body {
   margin: 2rem 0;
   border-collapse: collapse;
   font-size: 0.95rem;
-  line-height: 1.45;
+  line-height: 1.55;
 }
 .prose-norma thead {
   border-top: 2px solid var(--ink);
@@ -304,12 +304,22 @@ body {
   color: var(--ink);
 }
 .prose-norma td {
-  padding: 0.65rem 0.9rem;
+  padding: 0.75rem 0.9rem;
   border-top: 1px solid var(--rule);
   vertical-align: top;
 }
 .prose-norma tr:hover td {
   background: var(--paper-sunk);
+}
+/* Saltos de línea dentro de celdas: se evita la acumulación de muchos <br>
+   consecutivos colapsando con un margen discreto y uniforme. */
+.prose-norma td br {
+  display: block;
+  content: "";
+  margin-top: 0.25rem;
+}
+.prose-norma td br + br {
+  display: none;
 }
 
 /* ─── Utilidades finales ─────────────────────────────────────────────────── */

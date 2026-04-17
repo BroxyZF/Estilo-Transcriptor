@@ -2,14 +2,13 @@
 
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 interface Props {
   markdown: string;
 }
 
-/**
- * Slug consistente con el usado en la página del índice.
- */
+/** Slug consistente con el usado en la generación del TOC. */
 function slugify(s: string): string {
   return s
     .toLowerCase()
@@ -20,7 +19,7 @@ function slugify(s: string): string {
     .replace(/\s+/g, "-");
 }
 
-/** Extrae el texto llano de hijos arbitrarios de react-markdown. */
+/** Extrae texto llano de hijos arbitrarios de react-markdown. */
 function textoPlano(nodes: React.ReactNode): string {
   if (nodes == null || typeof nodes === "boolean") return "";
   if (typeof nodes === "string" || typeof nodes === "number") return String(nodes);
@@ -33,7 +32,6 @@ function textoPlano(nodes: React.ReactNode): string {
 }
 
 const components: Components = {
-  // Los h2 reciben ID anclable para el TOC lateral
   h2({ children, ...props }) {
     const id = slugify(textoPlano(children));
     return (
@@ -50,15 +48,16 @@ const components: Components = {
       </h3>
     );
   },
-  // Los ejemplos cirílicos reciben lang="ru" automáticamente si vienen como
-  // strong con caracteres cirílicos — para que los subsets tipográficos de
-  // PT Serif rusa se apliquen bien.
 };
 
 export default function NormaContenido({ markdown }: Props) {
   return (
     <div className="prose-norma">
-      <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]}
+        components={components}
+      >
         {markdown}
       </ReactMarkdown>
     </div>

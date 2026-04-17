@@ -1,7 +1,14 @@
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
+import { normasDisponibles } from "@/lib/normas";
 
 export default function Header() {
+  const normas = normasDisponibles();
+  const { href, label } =
+    normas.length === 1
+      ? { href: `/normas/${normas[0].slug}`, label: "La Norma" }
+      : { href: "/normas", label: "Normas" };
+
   return (
     <header
       className="sticky top-0 z-40 backdrop-blur-md border-b border-rule"
@@ -27,10 +34,10 @@ export default function Header() {
             Transcriptor
           </Link>
           <Link
-            href="/norma"
+            href={href}
             className="text-sm smallcaps text-muted hover:text-ink transition-colors"
           >
-            La Norma
+            {label}
           </Link>
           <span className="hidden sm:inline h-4 w-px bg-rule mx-1" aria-hidden="true" />
           <ThemeToggle />
