@@ -17,7 +17,7 @@ export default function EstadoMotorPill({ estado }: Props) {
   const { label, color, pulse } = META[estado];
   return (
     <div
-      className="inline-flex items-center gap-2 text-sm smallcaps text-muted"
+      className="inline-flex items-center gap-2 text-xs smallcaps text-muted"
       role="status"
       aria-live="polite"
     >

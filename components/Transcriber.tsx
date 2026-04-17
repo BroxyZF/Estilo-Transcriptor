@@ -173,7 +173,7 @@ export default function Transcriber() {
   return (
     <section ref={contenedorRef} className="relative scroll-mt-20">
       {/* Barra superior: estado + contador */}
-      <div className="flex flex-wrap items-center justify-between gap-3 mb-6 text-sm text-muted">
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-6 text-xs text-muted">
         <EstadoMotorPill estado={estado} />
         <span
           className={`smallcaps oldstyle-nums tabular-nums ${sobrepasa ? "text-rubric" : ""}`}
@@ -198,7 +198,7 @@ export default function Transcriber() {
         {/* ── Entrada ── */}
         <div className="lg:pr-12">
           <label htmlFor="entrada" className="flex items-baseline justify-between mb-3">
-            <span className="smallcaps text-muted text-sm">
+            <span className="smallcaps text-muted text-xs">
               Texto original · кириллица
             </span>
             {texto && (
@@ -209,7 +209,7 @@ export default function Transcriber() {
                   setError(null);
                   inputRef.current?.focus();
                 }}
-                className="text-sm smallcaps text-muted hover:text-rubric transition-colors"
+                className="text-xs smallcaps text-muted hover:text-rubric transition-colors"
               >
                 Limpiar
               </button>
@@ -226,7 +226,7 @@ export default function Transcriber() {
             rows={3}
             spellCheck={false}
             lang="ru"
-            className={`w-full resize-none bg-transparent border-0 border-t border-b border-rule py-4 font-body text-ink placeholder:text-[color:var(--muted)] placeholder:opacity-50 focus:outline-none focus:border-gold transition-colors duration-200 ${claseInput}`}
+            className={`w-full resize-none bg-transparent border-0 border-t border-b border-rule py-4 font-body text-ink placeholder:text-[color:var(--muted)] placeholder:opacity-50 focus:outline-none focus:border-gold transition-all duration-200 ${claseInput}`}
             style={{ minHeight: "5rem" }}
           />
 
@@ -236,12 +236,12 @@ export default function Transcriber() {
               checked={simplificar}
               onChange={setSimplificar}
               label="Simplificar dobles consonantes"
-              hint="Анна → Ana, Россия → Rosía"
+              hint="Анна → Ana, Россия → Rusia"
             />
             <Toggle
               checked={usarPLN}
               onChange={setUsarPLN}
-              label="Acentuación neuronal"
+              label="Prosodia por red neuronal"
               hint="Experimental. Puede errar en formas declinadas."
             />
           </div>
@@ -258,13 +258,13 @@ export default function Transcriber() {
         {/* ── Salida ── */}
         <div className="lg:pl-12">
           <div className="flex items-baseline justify-between mb-3">
-            <span className="smallcaps text-muted text-sm">
+            <span className="smallcaps text-muted text-xs">
               Transcripción · Norma SRH
             </span>
             {resultado && !cargando && (
               <button
                 onClick={copiar}
-                className="text-sm smallcaps text-muted hover:text-gold transition-colors"
+                className="text-xs smallcaps text-muted hover:text-gold transition-colors"
                 title="Copiar al portapapeles"
               >
                 {copiado ? "Copiado ✓" : "Copiar"}
@@ -323,12 +323,12 @@ export default function Transcriber() {
           </div>
 
           {/* Metadata de la última transcripción */}
-          <div className="mt-5 min-h-[1.25rem] text-sm smallcaps text-muted tabular-nums">
+          <div className="mt-5 min-h-[1.25rem] text-xs smallcaps text-muted tabular-nums">
             {resultado && !cargando ? (
               <span className="inline-flex items-center gap-4">
                 <span>{resultado.ms.toLocaleString("es-ES")} ms</span>
                 <span className="text-rule">·</span>
-                <span>{resultado.nlp_activo ? "con acentuación neuronal" : "sin acentuación neuronal"}</span>
+                <span>{resultado.nlp_activo ? "con prosodia neuronal" : "sin prosodia neuronal"}</span>
               </span>
             ) : (
               <span className="opacity-0">—</span>
@@ -397,11 +397,11 @@ function Toggle({ checked, onChange, label, hint }: ToggleProps) {
         <span className="absolute left-0.5 h-4 w-4 rounded-full bg-paper shadow-sm transition-transform peer-checked:translate-x-4 peer-checked:bg-gold" />
       </span>
       <span className="flex-1">
-        <span className="block text-sm smallcaps text-ink group-hover:text-rubric transition-colors">
+        <span className="block text-xs smallcaps text-muted group-hover:text-ink transition-colors">
           {label}
         </span>
         {hint && (
-          <span className="block text-[13px] italic text-muted mt-0.5 leading-snug">
+          <span className="block text-[11px] italic text-muted/80 mt-0.5">
             {hint}
           </span>
         )}
